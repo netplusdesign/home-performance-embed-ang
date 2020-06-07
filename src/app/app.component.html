@@ -1,0 +1,39 @@
+
+<div class="table-responsive" id="{{id}}">
+	<table id="summary" class="table table-sm text-right">
+		<caption>
+			<p class="small">All power values in <abbr title="Kilowatt hours">kWh</abbr></p>
+			<ol class="small">
+				<li>Base 65&deg;F</li>
+      </ol>
+		</caption>
+		<thead>
+			<tr>
+				<th class="text-left">{{data?.items[0].date | date:"yyyy"}}</th>
+				<th>Used</th>
+				<th>Solar</th>
+				<th>Net</th>
+				<th><abbr title="Average daily usage">ADU</abbr></th>
+				<th><abbr title="Heating Degree Days">HDD</abbr>&#185;</th>
+			</tr>
+			<tr>
+				<th class="text-left">Totals</th>
+				<th><a href="{{src}}#/months/usage?house={{house}}&date={{data?.items[0].date | date:'yyyy'}}" >{{data?.totals.used | number:'1.0-0'}}</a></th>
+				<th><a href="{{src}}#/months/generation?house={{house}}&date={{data?.items[0].date | date:'yyyy'}}" >{{data?.totals.solar | number:'1.0-0'}}</a></th>
+				<th>{{data?.totals.net | number:'1.0-0'}}</th>
+				<th>{{data?.totals.adu | number:'1.1-1'}}</th>
+				<th><a href="{{src}}#/months/temperature?house={{house}}&date={{data?.items[0].date | date:'yyyy'}}" >{{data?.totals.hdd | number:'1.0-0'}}</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor='let month of data?.items'>
+				<td class="text-left"><a href="{{src}}#/days/summary?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.date | date:"MMM"}}</a></td>
+				<td><a href="{{src}}#/days/usage?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.used | number:'1.0-0'}}</a></td>
+				<td><a href="{{src}}#/days/generation?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.solar | number:'1.0-0'}}</a></td>
+				<td>{{month.net | number:'1.0-0'}}</td>
+				<td>{{month.adu | number:'1.1-1'}}</td>
+				<td><a href="{{src}}#/days/temperature?house={{house}}&date={{month.date | date:'yyyy-MM'}}" >{{month.hdd | number:'1.0-0'}}</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
